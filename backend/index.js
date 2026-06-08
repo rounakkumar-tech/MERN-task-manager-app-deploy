@@ -6,14 +6,17 @@ require('./Models/db');
 
 const PORT = process.env.PORT || 8080;
 const TaskRouter = require('./Routes/TaskRouter');
-const bodyParser = require('body-parser');
 const cors = require('cors');
+
+// Middleware - Order matters!
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
     res.send('Hello from the Server');
 });
-app.use(cors())
-app.use(bodyParser.json());
+
 app.use('/tasks', TaskRouter);
 
 app.listen(PORT, () => {

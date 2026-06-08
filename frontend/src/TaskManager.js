@@ -15,16 +15,23 @@ function TaskManager() {
     const [updateTask, setUpdateTask] = useState(null);
      
     const handleTask = () => {
-        if(updateTask && input) {
+        const trimmedInput = input.trim();
+        
+        if (!trimmedInput) {
+            notify('Task cannot be empty', 'error');
+            return;
+        }
+
+        if(updateTask && trimmedInput) {
             console.log("update api call");
             const obj = {
-                taskName: input,
+                taskName: trimmedInput,
                 isCompleted: updateTask.isCompleted,
                 _id: updateTask._id
             }
             handleUpdateItem();
            
-        }else if(updateTask == null && input) {
+        }else if(updateTask == null && trimmedInput) {
             console.log("create api call");
             HandleAddTask();
         }
@@ -39,7 +46,7 @@ function TaskManager() {
 
         const HandleAddTask = async() => {
             const obj = {
-                taskName : input,
+                taskName : input.trim(),
                 isCompleted : false
             }
         
@@ -64,8 +71,8 @@ function TaskManager() {
            try{
             const { data } = 
         await GetAlltasks();
-        setTasks(data);
-        setCopyTasks(data);
+        setTasks(data || []);
+        setCopyTasks(data || []);
         console.log("data", data);
            }catch(error){
             console.error('Error fetching tasks:', error);

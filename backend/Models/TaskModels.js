@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 const taskSchema = new mongoose.Schema({
     taskName: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        minlength: 1
     },
-    isDone: {
+    isCompleted: {
         type: Boolean,
         default: false
     }
