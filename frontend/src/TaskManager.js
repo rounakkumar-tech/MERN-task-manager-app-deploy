@@ -24,6 +24,7 @@ function TaskManager() {
 
         if(updateTask && trimmedInput) {
             console.log("update api call");
+            // eslint-disable-next-line no-unused-vars
             const obj = {
                 taskName: trimmedInput,
                 isCompleted: updateTask.isCompleted,
