@@ -6,4 +6,4 @@ export const notify = (message, type) => {
 
 
 
-export const API_URL = 'http://localhost:8080'; 
+export const API_URL = 'https://mern-task-manager-app-deploy-beryl.vercel.app'; 
